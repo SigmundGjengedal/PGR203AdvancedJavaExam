@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Delete | Kristiania Questionnaire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<main>
+    <div class="container">
+        <h1>Delete questions</h1>
+        <form method="post" class="form" action="/api/questions/delete">
+            <label>Chose Question: <select name="id" id="questions"></select></label>
+            <button class="btn">Delete</button>
+        </form>
+        <div>
+            <a href="index.html">Return to menu</a>
+        </div>
+    </div>
+
+</main>
+</body>
+<script>
+    fetch("/api/questions/select")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("questions").innerHTML = text;
+    });
+</script>
+
+</html>

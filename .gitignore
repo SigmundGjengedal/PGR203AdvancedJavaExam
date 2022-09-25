@@ -1,0 +1,5 @@
+/.idea/
+*.iml
+target/
+/pgr203.properties
+/PGR203-Exam/dependency-reduced-pom.xml

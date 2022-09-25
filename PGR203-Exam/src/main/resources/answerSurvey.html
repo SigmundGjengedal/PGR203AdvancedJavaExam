@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit answer | Kristiania Questionnaire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+    <div class="container">
+        <h1>Answer Survey</h1>
+        <label class ="label">Choose Survey: <select class="select" id="surveys" name="id"></select></label>
+        <button class="btn" onclick="printQuestions()">Select</button>
+        <div class ="container">
+            <form method="post" id="questionList" action="/api/saveAnswer">
+
+            </form>
+            <a href="index.html">Return to front page</a>
+        </div>
+    </div>
+</main>
+</body>
+
+<script>
+
+    fetch("/api/surveys/select")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("surveys").innerHTML = text;
+    });
+
+    function printQuestions(){
+        fetch(`/api/listAnswerForm?surveyId=${document.getElementById("surveys").value}`)
+            .then(function(response) {
+                return response.text();
+            }).then(function(text) {
+            document.getElementById("questionList").innerHTML = text;
+        });
+    }
+
+</script>
+</html>

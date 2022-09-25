@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get survey Rapport | Kristiania Questionnaire</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+    <div class="container">
+        <h1>Get Survey Report</h1>
+            <label class ="label">Choose Survey: <select class ="select" id="surveys" name="surveyID"></select></label>
+            <button class="btn" onclick="printAll()">Submit</button>
+        <div>
+            <div id="answersList">
+            </div>
+        </div>
+        <div>
+            <br>
+            <a href="index.html">Return to front page</a>
+        </div>
+
+    </div>
+</main>
+</body>
+
+<script>
+
+    fetch("/api/surveys/select")
+        .then(function(response) {
+            return response.text();
+        }).then(function(text) {
+        document.getElementById("surveys").innerHTML = text;
+    });
+
+    function printAll(){
+        fetch(`/api/surveyReport?surveyId=${document.getElementById("surveys").value}`)
+            .then(function(response) {
+                return response.text();
+            }).then(function(text) {
+            document.getElementById("answersList").innerHTML = text;
+        });
+    }
+
+</script>
+</html>
